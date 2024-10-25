@@ -40,9 +40,6 @@ def home():
     if receta_seleccionada:
         st.write(f"Receta seleccionada: {receta_seleccionada}")
 
-# Cerrar la conexión a la base de datos
-conn.close()
-
 def consultar_recetas():
     st.title("Consultar Recetas")
     # Aquí podemos cargar las recetas desde la base de datos
@@ -72,5 +69,8 @@ elif selection == "Modificar Inventario":
     modificar_inventario()
 elif selection == "Visualización de Datos":
     visualizacion_datos()
+
+# Cerrar la conexión a la base de datos
+conn.close()
 
 #--------------------------------------------
