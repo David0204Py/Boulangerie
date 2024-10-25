@@ -75,18 +75,6 @@ def modificar_inventario():
     st.title("Modificar Inventario")
     st.write("Aquí podrás modificar el inventario de ingredientes.")
 
-def visualizacion_datos():
-    st.title("Visualización de Datos")
-    # Consultar recetas desde la base de datos
-    recetas = obtener_recetas()
-    nombres = [receta[1] for receta in recetas]
-    # Contar cuántas recetas hay
-    fig, ax = plt.subplots()
-    ax.barh(nombres, [1]*len(nombres))  # Simulación para mostrar cada receta como una barra
-    ax.set_xlabel('Cantidad de recetas')
-    ax.set_title('Visualización de Recetas')
-
-    st.pyplot(fig)
 
 # Función para agregar recetas a la base de datos
 def agregar_receta_db(nombre, ingredientes, instrucciones):
