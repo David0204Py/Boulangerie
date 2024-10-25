@@ -35,20 +35,27 @@ def home():
 
 def consultar_recetas():
     st.title("Consultar Recetas")
-    # Aquí podemos cargar las recetas desde la base de datos
     st.write("Aquí podrás consultar las recetas existentes.")
-    #Consultar las recetas
-    recetas = obtener_recetas()
+    # Consultar las recetas
+    recetas = obtener_recetas()    
     # Mostrar las recetas en un dropdown
     receta_seleccionada = st.selectbox('Selecciona una receta', [r[1] for r in recetas])
     if receta_seleccionada:
-        st.write(f"Receta seleccionada: {receta_seleccionada}")
+        # Mostrar detalles de la receta seleccionada
+        for receta in recetas:
+            if receta[1] == receta_seleccionada:  # Comparar el nombre de la receta
+                st.subheader(receta[1])  # Nombre de la receta
+                st.write(f"**Ingredientes:** {receta[2]}")
+                st.write(f"**Instrucciones:** {receta[3]}")
+                st.write("---")
+    
+    # Mostrar todas las recetas
+    st.write("Lista de todas las recetas:")
     for receta in recetas:
         st.subheader(receta[1])  # Nombre de la receta
         st.write(f"**Ingredientes:** {receta[2]}")
         st.write(f"**Instrucciones:** {receta[3]}")
         st.write("---")
-
 
 def agregar_receta():
     st.title("Agregar Receta")
