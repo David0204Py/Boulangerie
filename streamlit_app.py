@@ -26,12 +26,22 @@ load_css('static/styles.css')
 
 # Sistema de navegación
 menu = ["Inicio", "Consultar Recetas", "Agregar Receta", "Modificar Inventario", "Visualización de Datos"]
-selection = st.sidebar.selectbox("Bienvenido a la app de Chou. Usa el menú para navegar.", menu)
+selection = st.sidebar.selectbox("Bienvenido Chou. Usa el menú para navegar.", menu)
 
 # Función para cada página
 def home():
     st.title("Bienvenido a Chou")
-    st.write("Selecciona una opción del menú para empezar.")
+#    st.write("Selecciona una opción del menú para empezar.")
+    # Consultar las recetas
+    cursor.execute("SELECT * FROM recetas_BP")
+    recetas = cursor.fetchall()
+    # Mostrar las recetas en un dropdown
+    receta_seleccionada = st.selectbox('Selecciona una receta', [r[1] for r in recetas])
+    if receta_seleccionada:
+        st.write(f"Receta seleccionada: {receta_seleccionada}")
+
+# Cerrar la conexión a la base de datos
+conn.close()
 
 def consultar_recetas():
     st.title("Consultar Recetas")
@@ -62,18 +72,5 @@ elif selection == "Modificar Inventario":
     modificar_inventario()
 elif selection == "Visualización de Datos":
     visualizacion_datos()
-
-# Consultar las recetas
-cursor.execute("SELECT * FROM recetas_BP")
-recetas = cursor.fetchall()
-
-# Mostrar las recetas en un dropdown
-receta_seleccionada = st.selectbox('Selecciona una receta', [r[1] for r in recetas])
-
-if receta_seleccionada:
-    st.write(f"Receta seleccionada: {receta_seleccionada}")
-
-# Cerrar la conexión a la base de datos
-conn.close()
 
 #--------------------------------------------
