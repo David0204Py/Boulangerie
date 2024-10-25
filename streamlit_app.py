@@ -1,8 +1,8 @@
 import sqlite3
 import streamlit as st
 import matplotlib.pyplot as plt
+import plotly.express as px
 
-#Correccion de librerias
 # Funcion para cargar el archivo JavaScript
 def load_js(file_name):
     with open(file_name) as f:
@@ -97,6 +97,29 @@ def visualizacion_datos():
             st.write("No hay nombres de recetas válidos para mostrar.")
     except Exception as e:
         st.error(f"Error al cargar las recetas: {e}")
+
+#Segunda visualizacion
+    st.title("Visualización de Datos 2")
+
+    # Consultar datos desde la base de datos y mostrar gráficos interactivos
+    recetas = obtener_recetas()
+    nombres = [receta[1] for receta in recetas]
+
+    # Gráfico de cantidad de recetas
+    fig1 = plt.figure()
+    plt.barh(nombres, [1] * len(nombres))
+    plt.xlabel('Cantidad de recetas')
+    plt.title('Visualización de Recetas')
+    st.pyplot(fig1)
+
+    # Gráfico de costo de ingredientes
+    cursor.execute("SELECT nombre_ingrediente, precio FROM ingredientes")
+    ingredientes_data = cursor.fetchall()
+    df_ingredientes = pd.DataFrame(ingredientes_data, columns=["Ingrediente", "Precio"])
+
+    fig2 = px.bar(df_ingredientes, x="Ingrediente", y="Precio", title="Costo de Ingredientes")
+    st.plotly_chart(fig2)
+
 
 # Función para agregar recetas a la base de datos
 def agregar_receta_db(nombre, ingredientes, instrucciones):
