@@ -30,7 +30,7 @@ selection = st.sidebar.selectbox("Menú", menu)
 
 # Función para cada página
 def home():
-    st.title("Bienvenido a la app de recetas")
+    st.title("Bienvenido a Chou")
     st.write("Selecciona una opción del menú para empezar.")
 
 def consultar_recetas():
@@ -62,9 +62,6 @@ elif selection == "Modificar Inventario":
     modificar_inventario()
 elif selection == "Visualización de Datos":
     visualizacion_datos()
-
-# Crear la interfaz Streamlit
-st.title("App de Chou")
 
 # Mostrar contenido en la interfaz
 st.write("Bienvenido a la app de Chou. Usa el menú para navegar.")
