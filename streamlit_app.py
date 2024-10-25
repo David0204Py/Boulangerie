@@ -1,6 +1,6 @@
 import sqlite3
 import streamlit as st
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 # Funcion para cargar el archivo JavaScript
 def load_js(file_name):
@@ -75,6 +75,33 @@ def modificar_inventario():
     st.title("Modificar Inventario")
     st.write("Aquí podrás modificar el inventario de ingredientes.")
 
+def visualizacion_datos():
+    st.title("Visualización de Datos")
+    
+    # Intentar obtener recetas desde la base de datos
+    try:
+        recetas = obtener_recetas()
+        
+        if not recetas:
+            st.write("No hay recetas en la base de datos para mostrar.")
+            return
+        
+        # Extraer nombres de las recetas (están en la segunda columna)
+        nombres = [receta[1] for receta in recetas if receta[1]]  # Filtrar valores nulos
+        
+        # Si hay nombres, continuar con la visualización
+        if nombres:
+            fig, ax = plt.subplots()
+            ax.barh(nombres, [1] * len(nombres))  # Cada receta se muestra como una barra
+            
+            ax.set_xlabel('Cantidad')
+            ax.set_title('Distribución de Recetas')
+            st.pyplot(fig)
+        else:
+            st.write("No hay nombres de recetas válidos para mostrar.")
+    
+    except Exception as e:
+        st.error(f"Error al cargar las recetas: {e}")
 
 # Función para agregar recetas a la base de datos
 def agregar_receta_db(nombre, ingredientes, instrucciones):
