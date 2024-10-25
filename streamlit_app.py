@@ -90,7 +90,7 @@ def visualizacion_datos():
         # Si hay nombres, continuar con la visualización
         if nombres:
             fig, ax = plt.subplots()
-            ax.barh(nombres, [1] * len(libros))  # Cada receta se muestra como una barra    
+            ax.barh(nombres, [1] * libros)  # Cada receta se muestra como una barra    
             ax.set_xlabel('Cantidad')
             ax.set_title('Distribución de Recetas')
             st.pyplot(fig)
