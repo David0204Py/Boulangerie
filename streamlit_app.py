@@ -1,6 +1,6 @@
 import sqlite3
 import streamlit as st
-import matplotlib.pyplot as plt
+import matplotlib as plt
 
 #Correccion de librerias
 # Funcion para cargar el archivo JavaScript
