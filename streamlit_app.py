@@ -45,8 +45,9 @@ def consultar_recetas():
         for receta in recetas:
             if receta[1] == receta_seleccionada:  # Comparar el nombre de la receta
                 st.subheader(receta[1])  # Nombre de la receta
-                st.write(f"**Ingredientes:** {receta[2]}")
-                st.write(f"**Instrucciones:** {receta[3]}")
+                st.write(f"**Nombre de Receta:** {receta[2]}")
+                st.write(f"**Instrucciones:** {receta[7]}")
+                st.write(f"**Tiempo de preparacion:** {receta[3]}")
                 st.write("---")
     
     # Mostrar todas las recetas
