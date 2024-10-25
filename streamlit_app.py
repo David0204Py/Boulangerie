@@ -1,5 +1,6 @@
 import sqlite3
 import streamlit as st
+import matplotlib.pyplot as plt
 
 # Cargar JavaScript (si se requiere)
 def load_js(file_name):
@@ -76,7 +77,18 @@ def modificar_inventario():
 
 def visualizacion_datos():
     st.title("Visualización de Datos")
-    st.write("Gráficos y estadísticas sobre las recetas.")
+
+    # Consultar recetas desde la base de datos
+    recetas = obtener_recetas()
+    nombres = [receta[1] for receta in recetas]
+
+    # Contar cuántas recetas hay
+    fig, ax = plt.subplots()
+    ax.barh(nombres, [1]*len(nombres))  # Simulación para mostrar cada receta como una barra
+    ax.set_xlabel('Cantidad de recetas')
+    ax.set_title('Visualización de Recetas')
+
+    st.pyplot(fig)
 
 # Función para agregar recetas a la base de datos
 def agregar_receta_db(nombre, ingredientes, instrucciones):
