@@ -15,10 +15,10 @@ def load_css(file_name):
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Mostrar logo en la interfaz
-st.image('logo.png', width=200)
+st.image('Icono_020_PNG_BP.png', width=200)
 
 # Conectar a la base de datos
-conn = sqlite3.connect('database.db')
+conn = sqlite3.connect('base_datos.db')
 cursor = conn.cursor()
 
 # Cargar estilos CSS
@@ -51,3 +51,6 @@ receta_seleccionada = st.selectbox('Selecciona una receta', [r[1] for r in recet
 
 if receta_seleccionada:
     st.write(f"Receta seleccionada: {receta_seleccionada}")
+
+# Cerrar la conexión a la base de datos
+conn.close()
