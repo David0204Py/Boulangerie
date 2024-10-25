@@ -57,7 +57,7 @@ def consultar_recetas():
     for receta in recetas:
         st.subheader(receta[1])  # Nombre de la receta
         st.write(f"**Ingredientes:** {receta[2]}")
-        st.write(f"**Instrucciones:** {receta[3]}")
+        st.write(f"**Instrucciones:** {receta[7]}")
         st.write("---")
 
 def agregar_receta():
