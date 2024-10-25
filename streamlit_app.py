@@ -37,13 +37,18 @@ def consultar_recetas():
     st.title("Consultar Recetas")
     # Aquí podemos cargar las recetas desde la base de datos
     st.write("Aquí podrás consultar las recetas existentes.")
-    # Consultar las recetas
-    cursor.execute("SELECT * FROM recetas_BP")
-    recetas = cursor.fetchall()
+    #Consultar las recetas
+    recetas = obtener_recetas()
     # Mostrar las recetas en un dropdown
     receta_seleccionada = st.selectbox('Selecciona una receta', [r[1] for r in recetas])
     if receta_seleccionada:
         st.write(f"Receta seleccionada: {receta_seleccionada}")
+    for receta in recetas:
+        st.subheader(receta[1])  # Nombre de la receta
+        st.write(f"**Ingredientes:** {receta[2]}")
+        st.write(f"**Instrucciones:** {receta[3]}")
+        st.write("---")
+
 
 def agregar_receta():
     st.title("Agregar Receta")
@@ -70,6 +75,11 @@ def agregar_receta_db(nombre, ingredientes, instrucciones):
         VALUES (?, ?, ?)
     ''', (nombre, ingredientes, instrucciones))
     conn.commit()
+
+# Función para obtener todas las recetas
+def obtener_recetas():
+    cursor.execute("SELECT * FROM recetas_BP")
+    return cursor.fetchall()
 
 # Lógica para cambiar de página
 if selection == "Inicio":
