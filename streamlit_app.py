@@ -80,7 +80,6 @@ def visualizacion_datos():
     # Consultar recetas desde la base de datos
     recetas = obtener_recetas()
     nombres = [receta[1] for receta in recetas]
-
     # Contar cuántas recetas hay
     fig, ax = plt.subplots()
     ax.barh(nombres, [1]*len(nombres))  # Simulación para mostrar cada receta como una barra
