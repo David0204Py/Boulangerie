@@ -45,17 +45,15 @@ def consultar_recetas():
     if receta_seleccionada:
         st.write(f"Receta seleccionada: {receta_seleccionada}")
 
-
-def agregar_receta(nombre, ingredientes, instrucciones):
+def agregar_receta():
     st.title("Agregar Receta")
-    # Aquí pondríamos un formulario para agregar una receta
-    st.write("Formulario para agregar nuevas recetas.")
-    # Función para agregar recetas a la base de datos
-    cursor.execute('''
-        INSERT INTO recetas (nombre, ingredientes, instrucciones)
-        VALUES (?, ?, ?)
-    ''', (nombre, ingredientes, instrucciones))
-    conn.commit()
+    # Formulario para agregar nuevas recetas
+    nombre = st.text_input("Nombre de la receta")
+    ingredientes = st.text_area("Ingredientes")
+    instrucciones = st.text_area("Instrucciones")
+    if st.button("Agregar Receta"):
+        agregar_receta_db(nombre, ingredientes, instrucciones)
+        st.success("Receta agregada exitosamente!")
 
 def modificar_inventario():
     st.title("Modificar Inventario")
@@ -64,6 +62,14 @@ def modificar_inventario():
 def visualizacion_datos():
     st.title("Visualización de Datos")
     st.write("Gráficos y estadísticas sobre las recetas.")
+
+# Función para agregar recetas a la base de datos
+def agregar_receta_db(nombre, ingredientes, instrucciones):
+    cursor.execute('''
+        INSERT INTO recetas_BP (nombre, ingredientes, instrucciones)
+        VALUES (?, ?, ?)
+    ''', (nombre, ingredientes, instrucciones))
+    conn.commit()
 
 # Lógica para cambiar de página
 if selection == "Inicio":
