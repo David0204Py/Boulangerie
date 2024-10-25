@@ -48,7 +48,7 @@ def consultar_recetas():
                 st.write(f"**Nombre de Receta:** {receta[1]}")
                 st.write(f"**Instrucciones:** {receta[7]}")
                 st.write(f"**Tiempo de preparacion:** {receta[2]}")
-                st.write(f"**Referencia:** "{receta[5]}"")
+                st.write(f"**Referencia:** ("{receta[5]}")")
                 st.write(f"**Pagina:** {receta[6]}")
                 st.write("---")
     
