@@ -26,7 +26,7 @@ load_css('static/styles.css')
 
 # Sistema de navegación
 menu = ["Inicio", "Consultar Recetas", "Agregar Receta", "Modificar Inventario", "Visualización de Datos"]
-selection = st.sidebar.selectbox("Menú", menu)
+selection = st.sidebar.selectbox("Bienvenido a la app de Chou. Usa el menú para navegar.", menu)
 
 # Función para cada página
 def home():
@@ -62,9 +62,6 @@ elif selection == "Modificar Inventario":
     modificar_inventario()
 elif selection == "Visualización de Datos":
     visualizacion_datos()
-
-# Mostrar contenido en la interfaz
-st.write("Bienvenido a la app de Chou. Usa el menú para navegar.")
 
 # Consultar las recetas
 cursor.execute("SELECT * FROM recetas_BP")
