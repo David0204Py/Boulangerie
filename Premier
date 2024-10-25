@@ -1,1 +1,20 @@
-Code
+import sqlite3
+import pandas as pd
+
+# Conectar a la base de datos
+conn = sqlite3.connect('base_datos.db')
+
+# Cargar los datos en un DataFrame de Pandas
+df0 = pd.read_sql_query("SELECT * FROM recetas_BP", conn)
+df1 = pd.read_sql_query("SELECT * FROM inventario_BP", conn)
+df2 = pd.read_sql_query("SELECT * FROM ingredientes_BP", conn)
+df3 = pd.read_sql_query("SELECT * FROM ingre_recetas_BP", conn)
+
+print(df0.head(3))
+print(df1.head(3))
+print(df2.head(3))
+print(df3.head(3))
+print(f"Listo")
+
+# Cerrar la conexión a la base de datos
+conn.close()

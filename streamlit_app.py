@@ -127,3 +127,4 @@ elif selection == "Visualización de Datos":
 conn.close()
 
 #--------------------------------------------
+
