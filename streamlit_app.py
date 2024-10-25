@@ -86,11 +86,10 @@ def visualizacion_datos():
             return
         # Extraer nombres de las recetas (están en la segunda columna)
         nombres = [receta[1] for receta in recetas if receta[1]]  # Filtrar valores nulos
-        libros = [receta[7] for receta in recetas if receta[1]]  # Filtrar valores nulos
         # Si hay nombres, continuar con la visualización
         if nombres:
             fig, ax = plt.subplots()
-            ax.barh(nombres, [1] * libros)  # Cada receta se muestra como una barra    
+            ax.barh(nombres, [1] * len(nombres))  # Cada receta se muestra como una barra    
             ax.set_xlabel('Cantidad')
             ax.set_title('Distribución de Recetas')
             st.pyplot(fig)
