@@ -46,10 +46,16 @@ def consultar_recetas():
         st.write(f"Receta seleccionada: {receta_seleccionada}")
 
 
-def agregar_receta():
+def agregar_receta(nombre, ingredientes, instrucciones):
     st.title("Agregar Receta")
     # Aquí pondríamos un formulario para agregar una receta
     st.write("Formulario para agregar nuevas recetas.")
+    # Función para agregar recetas a la base de datos
+    cursor.execute('''
+        INSERT INTO recetas (nombre, ingredientes, instrucciones)
+        VALUES (?, ?, ?)
+    ''', (nombre, ingredientes, instrucciones))
+    conn.commit()
 
 def modificar_inventario():
     st.title("Modificar Inventario")
