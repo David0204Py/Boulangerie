@@ -1,10 +1,21 @@
 import sqlite3
 import streamlit as st
 
+# Cargar JavaScript (si se requiere)
+def load_js(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<script>{f.read()}</script>', unsafe_allow_html=True)
+
+# Llamamos la función para cargar el JS
+load_js('static/script.js')
+
 # Función para cargar el archivo CSS
 def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Mostrar logo en la interfaz
+st.image('logo.png', width=200)
 
 # Conectar a la base de datos
 conn = sqlite3.connect('database.db')
