@@ -2,12 +2,12 @@ import sqlite3
 import streamlit as st
 import matplotlib.pyplot as plt
 
-# Cargar JavaScript (si se requiere)
+# Funcion para cargar el archivo JavaScript
 def load_js(file_name):
     with open(file_name) as f:
         st.markdown(f'<script>{f.read()}</script>', unsafe_allow_html=True)
 
-# Llamamos la función para cargar el JS
+# Llamando la función para cargar el JS
 load_js('static/script.js')
 
 # Función para cargar el archivo CSS
@@ -15,21 +15,21 @@ def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Mostrar logo en la interfaz
-st.image('Icono_020_PNG_BP.png', width=400)
+# Llamando la funcion para cargar el CSS
+load_css('static/styles.css')
 
-# Conectar a la base de datos
+# Conectando a la base de datos
 conn = sqlite3.connect('base_datos.db')
 cursor = conn.cursor()
 
-# Cargar los estilos CSS
-load_css('static/styles.css')
+# Mostrando el logo en la interfaz general
+st.image('Icono_020_PNG_BP.png', width=400)
 
 # Sistema de navegación
 menu = ["Inicio", "Consultar Recetas", "Agregar Receta", "Modificar Inventario", "Visualización de Datos"]
 selection = st.sidebar.selectbox("Bienvenido Chou. Usa el menú para navegar.", menu)
 
-# Función para cada página
+# Funciónes para cada página
 def home():
     st.title("Bienvenido a Chou")
 #    st.write("Selecciona una opción del menú para empezar.")
@@ -77,7 +77,6 @@ def modificar_inventario():
 
 def visualizacion_datos():
     st.title("Visualización de Datos")
-
     # Consultar recetas desde la base de datos
     recetas = obtener_recetas()
     nombres = [receta[1] for receta in recetas]
@@ -103,7 +102,7 @@ def obtener_recetas():
     cursor.execute("SELECT * FROM recetas_BP")
     return cursor.fetchall()
 
-# Lógica para cambiar de página
+# Lógica para navegar entre páginas
 if selection == "Inicio":
     home()
 elif selection == "Consultar Recetas":
@@ -115,7 +114,7 @@ elif selection == "Modificar Inventario":
 elif selection == "Visualización de Datos":
     visualizacion_datos()
 
-# Cerrar la conexión a la base de datos
+# Cerrando la conexión a la base de datos
 conn.close()
 
 #--------------------------------------------
