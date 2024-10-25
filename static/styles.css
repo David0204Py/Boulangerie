@@ -1,0 +1,56 @@
+/* styles.css */
+
+body {
+    background-color: #FFFFFF; /* Fondo blanco común */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+ }
+ 
+ h1, h2, h3 {
+    color: #000064; /* Azul oscuro */
+ }
+ 
+ nav ul {
+    list-style-type: none;
+    background-color: #000064;
+    padding: 10px;
+ }
+ 
+ nav ul li {
+    display: inline;
+    margin-right: 10px;
+ }
+ 
+ nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    background-color: #C8BEB7; /* Beige */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+ }
+ 
+ nav ul li a:hover {
+    background-color: white;
+    color: #000064;
+ }
+ 
+ .content {
+    padding: 20px;
+ }
+ 
+ button {
+    background-color: #C8BEB7;
+    color: #000064;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+ }
+ 
+ button:hover {
+    background-color: #000064;
+    color: #FFFFFF;
+ }
+ 
