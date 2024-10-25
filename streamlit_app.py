@@ -15,7 +15,7 @@ def load_css(file_name):
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Mostrar logo en la interfaz
-st.image('Icono_020_PNG_BP.png', width=200)
+st.image('Icono_020_PNG_BP.png', width=400)
 
 # Conectar a la base de datos
 conn = sqlite3.connect('base_datos.db')
@@ -25,7 +25,7 @@ cursor = conn.cursor()
 load_css('static/styles.css')
 
 # Crear la interfaz Streamlit
-st.title("App de Recetas")
+st.title("App de Chou")
 
 # Ejemplo de menú de navegación
 st.markdown("""
@@ -40,7 +40,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Mostrar contenido en la interfaz
-st.write("Bienvenido a la app de recetas. Usa el menú para navegar.")
+st.write("Bienvenido a la app de Chou. Usa el menú para navegar.")
 
 # Consultar las recetas
 cursor.execute("SELECT * FROM recetas_BP")
