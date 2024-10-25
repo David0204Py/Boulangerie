@@ -21,23 +21,50 @@ st.image('Icono_020_PNG_BP.png', width=400)
 conn = sqlite3.connect('base_datos.db')
 cursor = conn.cursor()
 
-# Cargar estilos CSS
+# Cargar los estilos CSS
 load_css('static/styles.css')
+
+# Sistema de navegación
+menu = ["Inicio", "Consultar Recetas", "Agregar Receta", "Modificar Inventario", "Visualización de Datos"]
+selection = st.sidebar.selectbox("Menú", menu)
+
+# Función para cada página
+def home():
+    st.title("Bienvenido a la app de recetas")
+    st.write("Selecciona una opción del menú para empezar.")
+
+def consultar_recetas():
+    st.title("Consultar Recetas")
+    # Aquí podemos cargar las recetas desde la base de datos
+    st.write("Aquí podrás consultar las recetas existentes.")
+
+def agregar_receta():
+    st.title("Agregar Receta")
+    # Aquí pondríamos un formulario para agregar una receta
+    st.write("Formulario para agregar nuevas recetas.")
+
+def modificar_inventario():
+    st.title("Modificar Inventario")
+    st.write("Aquí podrás modificar el inventario de ingredientes.")
+
+def visualizacion_datos():
+    st.title("Visualización de Datos")
+    st.write("Gráficos y estadísticas sobre las recetas.")
+
+# Lógica para cambiar de página
+if selection == "Inicio":
+    home()
+elif selection == "Consultar Recetas":
+    consultar_recetas()
+elif selection == "Agregar Receta":
+    agregar_receta()
+elif selection == "Modificar Inventario":
+    modificar_inventario()
+elif selection == "Visualización de Datos":
+    visualizacion_datos()
 
 # Crear la interfaz Streamlit
 st.title("App de Chou")
-
-# Ejemplo de menú de navegación
-st.markdown("""
-<nav>
-   <ul>
-      <li><a href="#">Consultar Recetas</a></li>
-      <li><a href="#">Agregar Receta</a></li>
-      <li><a href="#">Modificar Inventario</a></li>
-      <li><a href="#">Visualización de Datos</a></li>
-   </ul>
-</nav>
-""", unsafe_allow_html=True)
 
 # Mostrar contenido en la interfaz
 st.write("Bienvenido a la app de Chou. Usa el menú para navegar.")
@@ -54,3 +81,5 @@ if receta_seleccionada:
 
 # Cerrar la conexión a la base de datos
 conn.close()
+
+#--------------------------------------------
