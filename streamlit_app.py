@@ -1,6 +1,6 @@
 import sqlite3
 import streamlit as st
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 # Funcion para cargar el archivo JavaScript
 def load_js(file_name):
