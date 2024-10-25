@@ -32,6 +32,11 @@ selection = st.sidebar.selectbox("Bienvenido Chou. Usa el menú para navegar.", 
 def home():
     st.title("Bienvenido a Chou")
 #    st.write("Selecciona una opción del menú para empezar.")
+
+def consultar_recetas():
+    st.title("Consultar Recetas")
+    # Aquí podemos cargar las recetas desde la base de datos
+    st.write("Aquí podrás consultar las recetas existentes.")
     # Consultar las recetas
     cursor.execute("SELECT * FROM recetas_BP")
     recetas = cursor.fetchall()
@@ -40,10 +45,6 @@ def home():
     if receta_seleccionada:
         st.write(f"Receta seleccionada: {receta_seleccionada}")
 
-def consultar_recetas():
-    st.title("Consultar Recetas")
-    # Aquí podemos cargar las recetas desde la base de datos
-    st.write("Aquí podrás consultar las recetas existentes.")
 
 def agregar_receta():
     st.title("Agregar Receta")
