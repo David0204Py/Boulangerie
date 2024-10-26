@@ -56,31 +56,6 @@ def home():
     st.markdown("<p style='text-align: center;'>En Chou, creamos repostería francesa artesanal, combinando técnica y creatividad. Ofrecemos tanto dulces como salados, todos con un toque artístico que convierte cada pieza en una pequeña obra maestra.</p>", unsafe_allow_html=True)
 
 def consultar_recetas():
-    st.title("Consultar Recetas")
-    st.write("Aquí podrás consultar las recetas existentes.")
-    # Obtener todas las recetas
-    recetas = obtener_recetas()
-    # Filtro por nombre de receta
-    filtro_nombre = st.text_input("Buscar por nombre de receta")
-    recetas_filtradas = [receta for receta in recetas if filtro_nombre.lower() in receta[1].lower()]
-    # Mostrar recetas filtradas
-    for receta in recetas_filtradas:
-        st.subheader(receta[1])  # nombre_receta
-        st.write(f"**Instrucciones:** {receta[7]}")  # instrucciones
-        st.write("---")
-        # Ajuste de cantidades
-        cantidad_base = st.number_input(f"Ajustar cantidad de base para {receta[1]}", min_value=1, value=1)
-        # Obtener ingredientes por receta
-        df_ingredientes = obtener_ingredientes_por_receta(receta[0])  # id_receta
-        df_ingredientes = pd.DataFrame(df_ingredientes, columns=['Ingrediente', 'Cantidad', 'Unidad'])
-        df_ingredientes["Cantidad Ajustada"] = df_ingredientes["Cantidad"] * cantidad_base
-
-        st.table(df_ingredientes[["Ingrediente", "Cantidad Ajustada", "Unidad"]])
-        # Formato de instrucciones
-        instrucciones_format = receta[7].replace(", ", "\n")  # instrucciones
-        st.text_area("Instrucciones:", instrucciones_format, height=150)
-    if not recetas_filtradas:
-        st.write("No se encontraron recetas que coincidan con tu búsqueda.")
 
 def agregar_receta():
     st.title("Agregar Receta")
