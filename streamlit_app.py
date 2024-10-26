@@ -62,7 +62,7 @@ def agregar_receta():
         agregar_receta_db(nombre, ingredientes, instrucciones)
         st.success("Receta agregada exitosamente!")
 
-def modificar_inventario():
+def Inventario():
     st.title("Modificar Inventario")
     st.write("Aquí podrás modificar el inventario de ingredientes.")
 # Mostrar inventario
@@ -105,13 +105,13 @@ def obtener_recetas():
 # Lógica para navegar entre páginas
 if selection == "Inicio":
     home()
-elif selection == "Consultar Recetas":
+elif selection == "Consultar recetas":
     consultar_recetas()
-elif selection == "Agregar Receta":
+elif selection == "Agregar receta":
     agregar_receta()
-elif selection == "Modificar Inventario":
-    modificar_inventario()
-elif selection == "Visualización de Datos":
+elif selection == "Inventario":
+    Inventario()
+elif selection == "Registro de datos":
     visualizacion_datos()
 
 # Cerrando la conexión a la base de datos
