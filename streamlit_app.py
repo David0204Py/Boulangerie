@@ -66,7 +66,7 @@ def Inventario():
     st.title("Inventario")
     st.write("Aquí podrás modificar el inventario de ingredientes.")
 # Mostrar inventario
-    cursor.execute("SELECT * FROM inventario_BP")
+    cursor.execute("SELECT ingrediente, cantidad, unidad FROM inventario_BP")
     inventario_data = cursor.fetchall()
     df_inventario = pd.DataFrame(inventario_data, columns=["ID Ingrediente", "Ingrediente", "Cantidad", "Unidad"])
     st.table(df_inventario)
