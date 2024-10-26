@@ -65,6 +65,16 @@ def agregar_receta():
 def modificar_inventario():
     st.title("Modificar Inventario")
     st.write("Aquí podrás modificar el inventario de ingredientes.")
+# Mostrar inventario
+    cursor.execute("SELECT * FROM inventario")
+    inventario_data = cursor.fetchall()
+    df_inventario = pd.DataFrame(inventario_data, columns=["ID Ingrediente", "Ingrediente", "Cantidad", "Unidad"])
+    st.table(df_inventario)
+# Mostrar_relaciones
+    cursor.execute("SELECT * FROM relacion_ingredientes")
+    relaciones_data = cursor.fetchall()
+    df_relaciones = pd.DataFrame(relaciones_data, columns=["ID Relación", "ID Receta", "ID Ingrediente", "Cantidad", "Unidad Medida"])
+    st.table(df_relaciones)
 
 def visualizacion_datos():
     st.title("Visualización de Datos 1")
