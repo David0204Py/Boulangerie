@@ -3,6 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import plotly.express as px
 import pandas as pd
+import time
 
 # Funcion para cargar el archivo JavaScript
 def load_js(file_name):
