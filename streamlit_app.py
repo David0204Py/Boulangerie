@@ -33,7 +33,7 @@ def mostrar_logotipos():
     # Esperar un momento
     time.sleep(2)  # Tiempo que se muestra el primer logotipo
     # Animación de recogida hacia el centro (simulada con un tiempo de espera)
-    for i in range(10):
+    for i in range(6):
         logotipo1.image("Icono_020_PNG_BP.png", use_column_width=True)
         time.sleep(0.1)  # Simula la recogida (puedes ajustar el tiempo)
     # Limpiar el primer logotipo
@@ -55,22 +55,41 @@ def home():
     st.title("Bienvenido a Chou")
     st.markdown("<p style='text-align: center;'>En Chou, creamos repostería francesa artesanal, combinando técnica y creatividad. Ofrecemos tanto dulces como salados, todos con un toque artístico que convierte cada pieza en una pequeña obra maestra.</p>", unsafe_allow_html=True)
 
-
 def consultar_recetas():
     st.title("Consultar Recetas")
     st.write("Aquí podrás consultar las recetas existentes.")
 
+    # Obtener todas las recetas
+    df_recetas = obtener_recetas()
+    df_recetas.drop("id_receta", axis=1, inplace=True)
+
     # Filtro por nombre de receta
-    recetas = obtener_recetas()
     filtro_nombre = st.text_input("Buscar por nombre de receta")
-    recetas_filtradas = [receta for receta in recetas if filtro_nombre.lower() in receta[1].lower()]
+    recetas_filtradas = df_recetas[df_recetas['Nombre'].str.contains(filtro_nombre, case=False, na=False)]
 
     # Mostrar recetas filtradas
-    for receta in recetas_filtradas:
-        st.subheader(receta[1])
-        st.write(f"**Ingredientes:** {receta[2]}")
-        st.write(f"**Instrucciones:** {receta[7]}")
-        st.write("---")
+    if not recetas_filtradas.empty:
+        for index, receta in recetas_filtradas.iterrows():
+            st.subheader(receta['Nombre'])
+            st.write(f"**Ingredientes:** {receta['Ingredientes']}")
+            st.write(f"**Instrucciones:** {receta['Instrucciones']}")
+            st.write("---")
+
+            # Ajuste de cantidades
+            cantidad_base = st.number_input(f"Ajustar cantidad de base para {receta['Nombre']}", min_value=1, value=1)
+
+            # Obtener ingredientes por receta
+            df_ingredientes = obtener_ingredientes_por_receta(receta['id_receta'])  # Asegúrate de que 'id_receta' esté disponible
+            df_ingredientes["Cantidad Ajustada"] = df_ingredientes["Cantidad"] * cantidad_base
+
+            st.table(df_ingredientes[["Ingrediente", "Cantidad Ajustada", "Unidad"]])
+
+            # Formato de instrucciones
+            instrucciones = receta['Instrucciones']  # Asegúrate de que 'Instrucciones' esté en el DataFrame
+            instrucciones_format = instrucciones.replace(", ", "\n")
+            st.text_area("Instrucciones:", instrucciones_format, height=150)
+    else:
+        st.write("No se encontraron recetas que coincidan con tu búsqueda.")
 
 def agregar_receta():
     st.title("Agregar Receta")
@@ -120,6 +139,17 @@ def agregar_receta_db(nombre, ingredientes, instrucciones):
 # Función para obtener todas las recetas
 def obtener_recetas():
     cursor.execute("SELECT * FROM recetas_BP")
+    return cursor.fetchall()
+
+def obtener_ingredientes_por_receta(id_receta):
+    # Consulta para obtener los ingredientes de la receta especificada
+    query = """
+    SELECT i.nombre_ingrediente, ri.cantidad, ri.unidad_medida
+    FROM ingre_recetas ri
+    JOIN ingredientes i ON ri.id_ingrediente = i.id_ingrediente
+    WHERE ri.id_receta = ?
+    """
+    cursor.execute(query, (id_receta,))
     return cursor.fetchall()
 
 # Lógica para navegar entre páginas
