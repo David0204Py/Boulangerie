@@ -34,7 +34,14 @@ selection = st.sidebar.selectbox("Bienvenido Chou. Usa el menú para navegar.", 
 # Funciónes para cada página
 def home():
     st.title("Bienvenido a Chou")
-#    st.write("Selecciona una opción del menú para empezar.")
+    # Animación del logotipo
+    st.image("Icono_020_PNG_BP.png", use_column_width=True)
+    time.sleep(2)
+    st.image("Icono_030_PNG_BP.png", use_column_width=True)
+    # Mensaje principal
+    st.markdown("<h2 style='text-align: center;'>Arte dulce, para saborear y admirar.</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>En Chou, creamos repostería francesa artesanal, combinando técnica y creatividad. Ofrecemos tanto dulces como salados, todos con un toque artístico que convierte cada pieza en una pequeña obra maestra.</p>", unsafe_allow_html=True)
+
 
 def consultar_recetas():
     st.title("Consultar Recetas")
@@ -66,7 +73,7 @@ def Inventario():
     st.title("Inventario")
     st.write("Aquí podrás modificar el inventario de ingredientes.")
 # Mostrar inventario
-    cursor.execute("SELECT ingrediente, cantidad, unidad FROM inventario_BP")
+    cursor.execute("SELECT * FROM inventario_BP")
     inventario_data = cursor.fetchall()
     df_inventario = pd.DataFrame(inventario_data, columns=["ID Ingrediente", "Ingrediente", "Cantidad", "Unidad"])
     st.table(df_inventario)
