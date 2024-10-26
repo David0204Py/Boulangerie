@@ -25,8 +25,10 @@ load_css('static/styles.css')
 conn = sqlite3.connect('base_datos.db')
 cursor = conn.cursor()
 
-# Mostrando el logo en la interfaz general
-st.image('Icono_020_PNG_BP.png', width=400)
+# Animación del logotipo
+st.image("Icono_020_PNG_BP.png", use_column_width=True)
+time.sleep(2)
+st.image("Icono_030_PNG_BP.png", use_column_width=True)
 
 # Sistema de navegación
 menu = ["Inicio", "Consultar recetas", "Agregar receta", "Inventario", "Registro de datos"]
@@ -34,13 +36,9 @@ selection = st.sidebar.selectbox("Bienvenido Chou. Usa el menú para navegar.", 
 
 # Funciónes para cada página
 def home():
-    st.title("Bienvenido a Chou")
-    # Animación del logotipo
-    st.image("Icono_020_PNG_BP.png", use_column_width=True)
-    time.sleep(2)
-    st.image("Icono_030_PNG_BP.png", use_column_width=True)
     # Mensaje principal
     st.markdown("<h2 style='text-align: center;'>Arte dulce, para saborear y admirar.</h2>", unsafe_allow_html=True)
+    st.title("Bienvenido a Chou")
     st.markdown("<p style='text-align: center;'>En Chou, creamos repostería francesa artesanal, combinando técnica y creatividad. Ofrecemos tanto dulces como salados, todos con un toque artístico que convierte cada pieza en una pequeña obra maestra.</p>", unsafe_allow_html=True)
 
 
