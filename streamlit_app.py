@@ -92,7 +92,7 @@ def visualizacion_datos():
     st.pyplot(fig1)
 
     # Gráfico de costo de ingredientes
-    cursor.execute("SELECT nombre_ingrediente, precio FROM ingredientes")
+    cursor.execute("SELECT nombre_ingrediente, precio FROM ingredientes_BP")
     ingredientes_data = cursor.fetchall()
     df_ingredientes = pd.DataFrame(ingredientes_data, columns=["Ingrediente", "Precio"])
 
