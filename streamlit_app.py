@@ -25,10 +25,24 @@ load_css('static/styles.css')
 conn = sqlite3.connect('base_datos.db')
 cursor = conn.cursor()
 
-# Animación del logotipo
-st.image("Icono_020_PNG_BP.png", use_column_width=True)
-time.sleep(2)
-st.image("Icono_030_PNG_BP.png", use_column_width=True)
+# Función para mostrar el logotipo con animación
+def mostrar_logotipos():
+    # Mostrar el primer logotipo
+    logotipo1 = st.empty()
+    logotipo1.image("Icono_020_PNG_BP.png", use_column_width=True)
+    # Esperar un momento
+    time.sleep(2)  # Tiempo que se muestra el primer logotipo
+    # Animación de recogida hacia el centro (simulada con un tiempo de espera)
+    for i in range(10):
+        logotipo1.image("Icono_020_PNG_BP.png", use_column_width=True)
+        time.sleep(0.1)  # Simula la recogida (puedes ajustar el tiempo)
+    # Limpiar el primer logotipo
+    logotipo1.empty()
+    # Mostrar el segundo logotipo
+    logotipo2 = st.empty()
+    logotipo2.image("Icono_030_PNG_BP.png", use_column_width=True)
+# Llamar a la función para mostrar los logotipos
+mostrar_logotipos()
 
 # Sistema de navegación
 menu = ["Inicio", "Consultar recetas", "Agregar receta", "Inventario", "Registro de datos"]
