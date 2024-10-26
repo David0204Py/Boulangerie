@@ -28,7 +28,7 @@ cursor = conn.cursor()
 st.image('Icono_020_PNG_BP.png', width=400)
 
 # Sistema de navegación
-menu = ["Inicio", "Consultar Recetas", "Agregar Receta", "Modificar Inventario", "Visualización de Datos"]
+menu = ["Inicio", "Consultar recetas", "Agregar receta", "Inventario", "Registro de datos"]
 selection = st.sidebar.selectbox("Bienvenido Chou. Usa el menú para navegar.", menu)
 
 # Funciónes para cada página
@@ -63,7 +63,7 @@ def agregar_receta():
         st.success("Receta agregada exitosamente!")
 
 def Inventario():
-    st.title("Modificar Inventario")
+    st.title("Inventario")
     st.write("Aquí podrás modificar el inventario de ingredientes.")
 # Mostrar inventario
     cursor.execute("SELECT * FROM inventario_BP")
