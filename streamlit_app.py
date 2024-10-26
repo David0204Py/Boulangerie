@@ -39,26 +39,15 @@ def home():
 def consultar_recetas():
     st.title("Consultar Recetas")
     st.write("Aquí podrás consultar las recetas existentes.")
-    # Consultar las recetas
-    recetas = obtener_recetas()    
-    # Mostrar las recetas en un dropdown
-    receta_seleccionada = st.selectbox('Selecciona una receta', [r[1] for r in recetas])
-    if receta_seleccionada:
-        # Mostrar detalles de la receta seleccionada
-        for receta in recetas:
-            if receta[1] == receta_seleccionada:  # Comparar el nombre de la receta
-                st.subheader(receta[1])  # Nombre de la receta
-                st.write(f"**Nombre de Receta:** {receta[1]}")
-                st.write(f"**Instrucciones:** {receta[7]}")
-                st.write(f"**Tiempo de preparacion:** {receta[2]}")
-                st.write(f"**Referencia:** {receta[5]}")
-                st.write(f"**Pagina:** {receta[6]}")
-                st.write("---")
-    
-    # Mostrar todas las recetas
-    st.write("Lista de todas las recetas:")
-    for receta in recetas:
-        st.subheader(receta[1])  # Nombre de la receta
+
+    # Filtro por nombre de receta
+    recetas = obtener_recetas()
+    filtro_nombre = st.text_input("Buscar por nombre de receta")
+    recetas_filtradas = [receta for receta in recetas if filtro_nombre.lower() in receta[1].lower()]
+
+    # Mostrar recetas filtradas
+    for receta in recetas_filtradas:
+        st.subheader(receta[1])
         st.write(f"**Ingredientes:** {receta[2]}")
         st.write(f"**Instrucciones:** {receta[7]}")
         st.write("---")
@@ -79,26 +68,21 @@ def modificar_inventario():
 
 def visualizacion_datos():
     st.title("Visualización de Datos 1")
-
     # Consultar datos desde la base de datos y mostrar gráficos interactivos
     recetas = obtener_recetas()
     nombres = [receta[1] for receta in recetas]
-
     # Gráfico de cantidad de recetas
     fig1 = plt.figure()
     plt.barh(nombres, [1] * len(nombres))
     plt.xlabel('Cantidad de recetas')
     plt.title('Visualización de Recetas')
     st.pyplot(fig1)
-
     # Gráfico de costo de ingredientes
     cursor.execute("SELECT nombre_ingrediente, precio FROM ingredientes_BP")
     ingredientes_data = cursor.fetchall()
     df_ingredientes = pd.DataFrame(ingredientes_data, columns=["Ingrediente", "Precio"])
-
     fig2 = px.bar(df_ingredientes, x="Ingrediente", y="Precio", title="Costo de Ingredientes")
     st.plotly_chart(fig2)
-
 
 # Función para agregar recetas a la base de datos
 def agregar_receta_db(nombre, ingredientes, instrucciones):
