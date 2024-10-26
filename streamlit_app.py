@@ -58,32 +58,26 @@ def home():
 def consultar_recetas():
     st.title("Consultar Recetas")
     st.write("Aquí podrás consultar las recetas existentes.")
-
     # Obtener todas las recetas
     df_recetas = obtener_recetas()
     df_recetas.drop("id_receta", axis=1, inplace=True)
-
     # Filtro por nombre de receta
     filtro_nombre = st.text_input("Buscar por nombre de receta")
     recetas_filtradas = df_recetas[df_recetas['Nombre'].str.contains(filtro_nombre, case=False, na=False)]
-
     # Mostrar recetas filtradas
     if not recetas_filtradas.empty:
         for index, receta in recetas_filtradas.iterrows():
             st.subheader(receta['Nombre'])
-            st.write(f"**Ingredientes:** {receta['Ingredientes']}")
+            st.write(f"**Referencia:** {receta['Libro']}")
             st.write(f"**Instrucciones:** {receta['Instrucciones']}")
             st.write("---")
-
             # Ajuste de cantidades
             cantidad_base = st.number_input(f"Ajustar cantidad de base para {receta['Nombre']}", min_value=1, value=1)
-
             # Obtener ingredientes por receta
             df_ingredientes = obtener_ingredientes_por_receta(receta['id_receta'])  # Asegúrate de que 'id_receta' esté disponible
             df_ingredientes["Cantidad Ajustada"] = df_ingredientes["Cantidad"] * cantidad_base
 
             st.table(df_ingredientes[["Ingrediente", "Cantidad Ajustada", "Unidad"]])
-
             # Formato de instrucciones
             instrucciones = receta['Instrucciones']  # Asegúrate de que 'Instrucciones' esté en el DataFrame
             instrucciones_format = instrucciones.replace(", ", "\n")
